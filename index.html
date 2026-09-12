@@ -137,7 +137,7 @@
     <p>
       I don't think you were supposed to find this page.
     </p>
-    <button onclick="nextPage(2)">But I found it anyway →</button>
+    <button onclick="startMusic(); nextPage(2)">But I found it anyway →</button>
   </section>
 
   <!-- SCREEN 2 -->
@@ -256,6 +256,9 @@
         }, i * 120);
       }
     }
+    function startMusic() {
+  document.getElementById("bgMusic").play();
+}
   </script>
 
 </body>
