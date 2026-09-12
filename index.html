@@ -1,265 +1,822 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>A Little Surprise 🎀</title>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-    }
+<title>For Shreya ♡</title>
 
-    body {
-      min-height: 100vh;
-      font-family: Arial, sans-serif;
-      background: linear-gradient(135deg, #ffe0ec, #e9ddff, #dff7ff);
-      overflow-x: hidden;
-      color: #49354d;
-    }
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Great+Vibes&display=swap');
 
-    .page {
-      min-height: 100vh;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      flex-direction: column;
-      text-align: center;
-      padding: 25px;
-      animation: fade 0.8s ease;
-    }
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
 
-    .page.active {
-      display: flex;
-    }
+body{
+  min-height:100vh;
+  overflow-x:hidden;
+  color:#49343b;
+  font-family:'Cormorant Garamond',serif;
+}
 
-    @keyframes fade {
-      from {
-        opacity: 0;
-        transform: translateY(15px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
+/* ================= PASSCODE ================= */
 
-    h1 {
-      font-size: 2.7rem;
-      margin-bottom: 20px;
-    }
+#lockScreen{
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:25px;
+  background:
+    radial-gradient(circle at top,#fff7f2,#eadbd0 55%,#d8c5ba);
+}
 
-    p {
-      font-size: 1.15rem;
-      line-height: 1.7;
-      max-width: 650px;
-    }
+.lockBox{
+  width:min(420px,90%);
+  padding:45px 30px;
+  background:rgba(255,250,245,.82);
+  border:1px solid rgba(100,70,60,.2);
+  box-shadow:0 20px 60px rgba(60,40,30,.18);
+  border-radius:18px;
+}
 
-    button {
-      margin-top: 30px;
-      padding: 14px 30px;
-      border: none;
-      border-radius: 30px;
-      background: white;
-      color: #d14b80;
-      font-size: 1rem;
-      font-weight: bold;
-      cursor: pointer;
-      box-shadow: 0 8px 25px rgba(0,0,0,0.12);
-      transition: 0.25s;
-    }
+.lockIcon{
+  font-size:55px;
+  margin-bottom:15px;
+}
 
-    button:hover {
-      transform: scale(1.07);
-    }
+.lockBox h1{
+  font-family:'Great Vibes',cursive;
+  font-size:3.3rem;
+  font-weight:400;
+}
 
-    .gift {
-      font-size: 100px;
-      cursor: pointer;
-      animation: bounce 1.3s infinite;
-    }
+.lockBox p{
+  margin:12px 0 22px;
+  font-size:1.1rem;
+}
 
-    @keyframes bounce {
-      0%, 100% {
-        transform: translateY(0);
-      }
-      50% {
-        transform: translateY(-15px);
-      }
-    }
+#passcode{
+  width:100%;
+  padding:14px;
+  border:1px solid #bca69b;
+  background:#fffaf6;
+  text-align:center;
+  font-size:1.2rem;
+  letter-spacing:6px;
+  outline:none;
+  border-radius:8px;
+}
 
-    .letter {
-      background: rgba(255,255,255,0.75);
-      padding: 30px;
-      border-radius: 25px;
-      max-width: 680px;
-      box-shadow: 0 12px 35px rgba(0,0,0,0.12);
-    }
+.mainBtn{
+  margin-top:18px;
+  padding:13px 30px;
+  border:none;
+  border-radius:25px;
+  background:#49343b;
+  color:white;
+  font-family:inherit;
+  font-size:1rem;
+  cursor:pointer;
+}
 
-    .big {
-      font-size: 4rem;
-      margin-bottom: 15px;
-    }
+#error{
+  color:#9b4d55;
+  margin-top:12px;
+  display:none;
+}
 
-    .heart {
-      position: fixed;
-      bottom: -30px;
-      font-size: 25px;
-      animation: floatUp 6s linear forwards;
-      pointer-events: none;
-    }
+/* ================= PAGES ================= */
 
-    @keyframes floatUp {
-      to {
-        transform: translateY(-110vh) rotate(360deg);
-        opacity: 0;
-      }
-    }
+#website{
+  display:none;
+}
 
-    .small {
-      margin-top: 20px;
-      font-size: 0.95rem;
-      opacity: 0.8;
-    }
-  </style>
+.page{
+  min-height:100vh;
+  position:relative;
+  display:none;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+  padding:45px 22px;
+  overflow:hidden;
+}
+
+.page.active{
+  display:flex;
+  animation:pageIn .8s ease;
+}
+
+@keyframes pageIn{
+  from{
+    opacity:0;
+    transform:translateY(18px);
+  }
+  to{
+    opacity:1;
+    transform:translateY(0);
+  }
+}
+
+/* Different vintage-style backgrounds */
+
+.page1{
+  background:
+    radial-gradient(circle at 20% 20%,rgba(255,255,255,.7),transparent 25%),
+    linear-gradient(135deg,#e8d9c8,#f7eee5,#d9c7b8);
+}
+
+.page2{
+  background:
+    radial-gradient(circle at 80% 20%,#e8c9bb,transparent 30%),
+    linear-gradient(120deg,#f4e4d7,#dfc6bb,#f8eee5);
+}
+
+.page3{
+  background:
+    radial-gradient(circle at 20% 80%,#d5b6a8,transparent 28%),
+    linear-gradient(135deg,#eee0d3,#d7c3b7,#f4ebe4);
+}
+
+.page4{
+  background:
+    radial-gradient(circle at 80% 20%,#f3c6c0,transparent 28%),
+    linear-gradient(145deg,#ead5cf,#f6e9df,#d8c1b8);
+}
+
+.page5{
+  background:
+    radial-gradient(circle at 10% 30%,#d7c2ad,transparent 30%),
+    linear-gradient(120deg,#eee2d4,#d5c0ae,#f3e9dc);
+}
+
+.page6{
+  background:
+    radial-gradient(circle at 80% 70%,#dcb7ae,transparent 30%),
+    linear-gradient(135deg,#e5d3c9,#f6e9e0,#d2beb5);
+}
+
+.page7{
+  background:
+    radial-gradient(circle at 15% 20%,#e3c8b5,transparent 28%),
+    linear-gradient(125deg,#f1e2d4,#d8c4b5,#eee0d5);
+}
+
+.page8{
+  background:
+    radial-gradient(circle at 70% 30%,#d8b5ae,transparent 30%),
+    linear-gradient(140deg,#e7d5d0,#f5e8df,#d4c0bb);
+}
+
+.page9{
+  background:
+    radial-gradient(circle at 50% 10%,#ead1c7,transparent 30%),
+    linear-gradient(135deg,#d8c7bd,#f3e8df,#dbc5bc);
+}
+
+.page10{
+  background:
+    radial-gradient(circle at 50% 50%,#f1d4ce,transparent 35%),
+    linear-gradient(135deg,#d8c1b8,#f5e9e1,#e1c8c0);
+}
+
+/* ================= TEXT ================= */
+
+.content{
+  position:relative;
+  z-index:5;
+  width:min(850px,94%);
+  padding:35px;
+}
+
+h1{
+  font-family:'Great Vibes',cursive;
+  font-size:4rem;
+  font-weight:400;
+  line-height:1.1;
+  margin-bottom:20px;
+}
+
+h2{
+  font-family:'Great Vibes',cursive;
+  font-size:3rem;
+  font-weight:400;
+}
+
+p{
+  font-size:1.22rem;
+  line-height:1.8;
+}
+
+.smallText{
+  margin-top:20px;
+  font-size:1rem;
+  opacity:.75;
+}
+
+.card{
+  background:rgba(255,249,243,.72);
+  backdrop-filter:blur(5px);
+  border:1px solid rgba(90,60,50,.16);
+  box-shadow:0 18px 45px rgba(70,45,35,.12);
+  padding:35px;
+  border-radius:12px;
+}
+
+/* ================= GIFT ================= */
+
+.gift{
+  font-size:110px;
+  margin:25px;
+  cursor:pointer;
+  animation:bounce 1.4s infinite;
+}
+
+@keyframes bounce{
+  50%{transform:translateY(-15px) rotate(2deg);}
+}
+
+/* ================= FLOATING DECORATIONS ================= */
+
+.float{
+  position:fixed;
+  z-index:2;
+  bottom:-60px;
+  pointer-events:none;
+  animation:floatForever linear infinite;
+  opacity:.75;
+}
+
+@keyframes floatForever{
+  0%{
+    transform:translateY(0) rotate(0deg);
+    opacity:0;
+  }
+  10%{
+    opacity:.8;
+  }
+  90%{
+    opacity:.8;
+  }
+  100%{
+    transform:translateY(-120vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+/* ================= LETTER ================= */
+
+.letter{
+  text-align:left;
+}
+
+.signature{
+  text-align:right;
+  margin-top:25px;
+  font-family:'Great Vibes',cursive;
+  font-size:2rem;
+}
+
+/* ================= FINAL ================= */
+
+.finalLine{
+  font-family:'Great Vibes',cursive;
+  font-size:3rem;
+  margin-top:25px;
+}
+
+/* ================= BUTTON ================= */
+
+.nextBtn{
+  margin-top:30px;
+  padding:13px 28px;
+  border:1px solid rgba(70,50,40,.3);
+  background:rgba(255,250,245,.8);
+  color:#49343b;
+  border-radius:25px;
+  font-family:inherit;
+  font-size:1.05rem;
+  cursor:pointer;
+  transition:.3s;
+}
+
+.nextBtn:hover{
+  transform:scale(1.06);
+}
+
+/* mobile */
+
+@media(max-width:600px){
+  h1{font-size:3rem;}
+  h2{font-size:2.4rem;}
+  p{font-size:1.08rem;}
+  .content{padding:20px;}
+  .card{padding:25px 20px;}
+}
+</style>
 </head>
 
 <body>
-<audio id="bgMusic" loop autoplay>
+
+<!-- ================= LOCK ================= -->
+
+<div id="lockScreen">
+
+  <div class="lockBox">
+
+    <div class="lockIcon">🔐</div>
+
+    <h1>A little secret...</h1>
+
+    <p>Shreya, there's something waiting for you.</p>
+
+    <input
+      id="passcode"
+      type="password"
+      maxlength="4"
+      placeholder="••••"
+    >
+
+    <br>
+
+    <button class="mainBtn" onclick="unlock()">
+      Unlock ♡
+    </button>
+
+    <p id="error">Hmm... that's not it 👀</p>
+
+  </div>
+
+</div>
+
+
+<!-- ================= WEBSITE ================= -->
+
+<div id="website">
+
+<!-- MUSIC -->
+
+<audio id="bgMusic" loop>
   <source src="sub_clair-happy-birthday-578363.mp3" type="audio/mpeg">
 </audio>
-  <!-- SCREEN 1 -->
-  <section class="page active" id="page1">
-    <div class="big">👀</div>
-    <h1>Wait...</h1>
-    <p>
-      I don't think you were supposed to find this page.
-    </p>
-    <button onclick="startMusic(); nextPage(2)">But I found it anyway →</button>
-  </section>
 
-  <!-- SCREEN 2 -->
-  <section class="page" id="page2">
-    <div class="big">🤨</div>
-    <h1>Are you sure?</h1>
-    <p>
-      Because once you continue, there's no going back...
-    </p>
-    <button onclick="nextPage(3)">Obviously 😌</button>
-  </section>
 
-  <!-- SCREEN 3 -->
-  <section class="page" id="page3">
-    <h1>I have something for you...</h1>
-    <p>Tap the gift 🎀</p>
+<!-- PAGE 1 -->
+
+<section class="page page1 active" id="page1">
+
+  <div class="content">
+
+    <h1>Hey Shreya... ♡</h1>
+
+    <p>
+      Before you do anything else,
+      I made a little something for you.
+    </p>
+
+    <button class="nextBtn" onclick="nextPage(2)">
+      I found it 👀 →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 2 -->
+
+<section class="page page2" id="page2">
+
+  <div class="content card">
+
+    <h2>Before you continue...</h2>
+
+    <p>
+      There are only three rules.
+      <br><br>
+      Smile. ♡<br>
+      Don't skip anything. 👀<br>
+      And remember... this is made especially for you.
+    </p>
+
+    <button class="nextBtn" onclick="nextPage(3)">
+      Okay, continue →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 3 -->
+
+<section class="page page3" id="page3">
+
+  <div class="content">
+
+    <h2>A little gift...</h2>
+
+    <p>Maybe you should open it.</p>
 
     <div class="gift" onclick="nextPage(4)">
       🎁
     </div>
-  </section>
 
-  <!-- SCREEN 4 -->
-  <section class="page" id="page4">
-    <div class="big">🎂</div>
-    <h1>HAPPY BIRTHDAY SHREYA!!</h1>
-
-    <p>
-      Today isn't just another day because today is the day
-      one of my favourite humans came into this world. 💗
+    <p class="smallText">
+      Tap the gift 👀
     </p>
 
-    <button onclick="nextPage(5)">There's more 👀</button>
-  </section>
+  </div>
 
-  <!-- SCREEN 5 -->
-  <section class="page" id="page5">
-    <div class="letter">
-      <h1>A little note for you 💌</h1>
+</section>
 
-      <p>
-        Thank you for being the person I can laugh with,
-        annoy endlessly, share random things with and still
-        know that you're always there.
-        <br><br>
 
-        I hope this year brings you the kind of happiness
-        that stays, memories that make you smile for years,
-        and everything you've secretly wished for.
-        <br><br>
+<!-- PAGE 4 -->
 
-        No matter how much we fight, tease each other or act
-        completely insane — you're still stuck with me. 😭
-        <br><br>
+<section class="page page4" id="page4">
 
-        Happy Birthday to my favourite idiot. 🎀
-      </p>
+  <div class="content">
 
-      <button onclick="nextPage(6)">One last thing →</button>
-    </div>
-  </section>
+    <div style="font-size:75px;">🎂</div>
 
-  <!-- SCREEN 6 -->
-  <section class="page" id="page6">
-    <div class="big">🥹💗</div>
-
-    <h1>You're genuinely special.</h1>
+    <h1>HAPPY BIRTHDAY<br>SHREYAAAA!!</h1>
 
     <p>
-      And I hope you never forget that.
+      Today is your day...
+      and somehow, I feel like I'm the lucky one
+      for having you in my life.
+    </p>
+
+    <button class="nextBtn" onclick="nextPage(5)">
+      There's more ♡
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 5 -->
+
+<section class="page page5" id="page5">
+
+  <div class="content card letter">
+
+    <h2>Dear Shreya,</h2>
+
+    <br>
+
+    <p>
+      Today is your day… but somehow, I feel like I'm the lucky one
+      for having you in my life.
       <br><br>
-      Happy Birthday once again. 🎂✨
-      <br>
-      Now go enjoy YOUR day, drama queen. 😭
+
+      There are some people who enter your life quietly and then,
+      without you even realising it, become a part of your everyday
+      happiness. You became that person for me. 🤍
+      <br><br>
+
+      From our stupid conversations to the moments when we laugh
+      over absolutely nothing, from teasing each other endlessly
+      to being there when things aren't okay — every little moment
+      with you has become a memory that I wouldn't want to lose.
+      <br><br>
+
+      I may not always say it, and sometimes I probably hide it
+      behind jokes and chaos 😭, but you genuinely mean so much to me.
+      <br><br>
+
+      I hope this new year of your life gives you everything you've
+      been wishing for — the dreams you've been quietly holding onto,
+      the happiness you've been waiting for, and the kind of moments
+      you'll remember years from now with the biggest smile.
+      <br><br>
+
+      And when life gets difficult, I hope you remember that you are
+      stronger, more capable and more loved than you sometimes realise.
+      <br><br>
+
+      So today, I don't just wish you a Happy Birthday.
+      I wish you a life full of beautiful surprises, genuine happiness,
+      crazy laughter, peaceful nights, unforgettable memories and
+      dreams that actually come true.
+      <br><br>
+
+      Thank you for being you.<br>
+      Thank you for being my person.<br>
+      And thank you for giving me a friendship I'll always be grateful for.
+      <br><br>
+
+      Happy Birthday, Shreya. 🤍🎂
+      <br><br>
+
+      No matter where life takes us, I hope a little piece of this
+      friendship always stays with us.
     </p>
 
-    <p class="small">Made with lots of love, chaos & friendship ♡</p>
-  </section>
+    <div class="signature">
+      With all my heart,<br>
+      Tvisha ♡
+    </div>
+
+    <div style="text-align:center;">
+      <button class="nextBtn" onclick="nextPage(6)">
+        One more thing →
+      </button>
+    </div>
+
+  </div>
+
+</section>
 
 
-  <script>
-    function nextPage(number) {
-      document.querySelectorAll(".page").forEach(page => {
-        page.classList.remove("active");
-      });
+<!-- PAGE 6 -->
 
-      document.getElementById("page" + number).classList.add("active");
+<section class="page page6" id="page6">
 
-      if (number >= 4) {
-        createHearts();
-      }
-    }
+  <div class="content card">
 
-    function createHearts() {
-      for (let i = 0; i < 30; i++) {
-        setTimeout(() => {
-          const heart = document.createElement("div");
-          heart.className = "heart";
+    <h2>Okay... jokes apart.</h2>
 
-          const emojis = ["💗", "🎀", "✨", "💖", "🌸"];
-          heart.innerHTML =
-            emojis[Math.floor(Math.random() * emojis.length)];
+    <br>
 
-          heart.style.left =
-            Math.random() * 100 + "vw";
+    <p>
+      Some people just become a part of your life so naturally
+      that you don't even realise how important they've become.
+      And you're one of those people for me. 🤍
+      <br><br>
 
-          heart.style.fontSize =
-            18 + Math.random() * 25 + "px";
+      We've had our silly fights, weird conversations, countless
+      laughs and probably enough nonsense to fill a whole book 😭 —
+      but I'd still choose all of it again.
+      <br><br>
 
-          document.body.appendChild(heart);
+      I don't know what the future will look like or where life
+      will take us, but I genuinely hope that no matter how much
+      things change, our friendship always remains one of those
+      things I can look back on and smile about.
+      <br><br>
 
-          setTimeout(() => {
-            heart.remove();
-          }, 6000);
+      I'm really, really grateful that I got you as my best friend.
+      <br><br>
 
-        }, i * 120);
-      }
-    }
-    function startMusic() {
-  document.getElementById("bgMusic").play();
+      Happy Birthday, Shreya. 🤍
+    </p>
+
+    <button class="nextBtn" onclick="nextPage(7)">
+      Keep going ♡
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 7 -->
+
+<section class="page page7" id="page7">
+
+  <div class="content">
+
+    <h2>One last thing...</h2>
+
+    <p>
+      I don't need a perfect friendship.
+      <br>
+      I just want ours — with all its chaos,
+      laughter, arguments and memories.
+    </p>
+
+    <br>
+
+    <div style="font-size:65px;">
+      🌷✨🤍✨🌷
+    </div>
+
+    <button class="nextBtn" onclick="nextPage(8)">
+      Continue →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 8 -->
+
+<section class="page page8" id="page8">
+
+  <div class="content">
+
+    <h2>For all the days ahead...</h2>
+
+    <p>
+      May you have countless reasons to smile,
+      people who genuinely care about you,
+      dreams that excite you,
+      and memories that stay forever.
+      <br><br>
+
+      And whenever you look back,
+      I hope this little surprise makes you smile.
+    </p>
+
+    <button class="nextBtn" onclick="nextPage(9)">
+      Almost there... 🌙
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 9 -->
+
+<section class="page page9" id="page9">
+
+  <div class="content">
+
+    <div style="font-size:70px;">
+      🌙✨⭐✨🌙
+    </div>
+
+    <h2>Shreya...</h2>
+
+    <p>
+      I'm really lucky to have you as my best friend.
+    </p>
+
+    <div class="finalLine">
+      Always remember that. ♡
+    </div>
+
+    <button class="nextBtn" onclick="nextPage(10)">
+      Finish the surprise →
+    </button>
+
+  </div>
+
+</section>
+
+
+<!-- PAGE 10 -->
+
+<section class="page page10" id="page10">
+
+  <div class="content">
+
+    <div style="font-size:70px;">
+      🎂✨🎀✨🎂
+    </div>
+
+    <h1>
+      HAPPY BIRTHDAY<br>
+      SHREYA!
+    </h1>
+
+    <p>
+      May this year be one of your most beautiful ones yet. 🤍
+    </p>
+
+    <br>
+
+    <p class="smallText">
+      Made with lots of chaos, memories & friendship ♡
+    </p>
+
+    <button class="nextBtn" onclick="restart()">
+      Replay from beginning ↺
+    </button>
+
+  </div>
+
+</section>
+
+</div>
+
+
+<script>
+
+/* ================= UNLOCK ================= */
+
+function unlock(){
+
+  const input = document.getElementById("passcode");
+  const error = document.getElementById("error");
+
+  if(input.value === "1309"){
+
+    document.getElementById("lockScreen").style.display = "none";
+    document.getElementById("website").style.display = "block";
+
+    startMusic();
+    createFloatingThings();
+
+  }else{
+
+    error.style.display = "block";
+    input.value = "";
+
+  }
 }
-  </script>
+
+
+/* ================= MUSIC ================= */
+
+function startMusic(){
+
+  const music = document.getElementById("bgMusic");
+
+  music.volume = 0.45;
+
+  music.play().catch(() => {});
+
+}
+
+
+/* ================= PAGE CHANGE ================= */
+
+function nextPage(number){
+
+  document.querySelectorAll(".page").forEach(page=>{
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page"+number).classList.add("active");
+
+}
+
+
+/* ================= FLOATING FOREVER ================= */
+
+function createFloatingThings(){
+
+  const emojis = [
+    "🌸","🌷","🌼","🌺",
+    "✨","⭐","🤍","🎀",
+    "💗","🦋","🍃"
+  ];
+
+  function makeFloat(){
+
+    const item = document.createElement("div");
+
+    item.className = "float";
+
+    item.innerHTML =
+      emojis[Math.floor(Math.random()*emojis.length)];
+
+    item.style.left =
+      Math.random()*100 + "vw";
+
+    item.style.fontSize =
+      (16 + Math.random()*25) + "px";
+
+    item.style.animationDuration =
+      (7 + Math.random()*8) + "s";
+
+    item.style.animationDelay =
+      Math.random()*2 + "s";
+
+    document.body.appendChild(item);
+
+    setTimeout(()=>{
+      item.remove();
+    },16000);
+
+  }
+
+  /* continuously create new decorations */
+
+  setInterval(makeFloat,450);
+
+  /* initial batch */
+
+  for(let i=0;i<18;i++){
+    setTimeout(makeFloat,i*180);
+  }
+
+}
+
+
+/* ================= REPLAY ================= */
+
+function restart(){
+
+  document.querySelectorAll(".page").forEach(page=>{
+    page.classList.remove("active");
+  });
+
+  document.getElementById("page1").classList.add("active");
+
+}
+
+</script>
 
 </body>
 </html>
